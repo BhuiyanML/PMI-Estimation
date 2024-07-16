@@ -1,16 +1,12 @@
 #!/bin/bash
-#$ -M rbhuiyan@nd.edu
-#$ -m e
-#$ -q gpu #@@czajka,gpu@@cvrl-rtx6k,gpu@@cvrl-a10
+#$ -q 
 #$ -l gpu_card=4
-#$ -l h=qa-a10*
-#$ -N synb-war-m-den
 
 # Load conda module
 module load python/3.9
 
 # Change directory to where the Python script is located
-cd /afs/crc.nd.edu/user/r/rbhuiyan/PMI-Estimation-main
+cd ~/PMI-Estimation-main
 
 # Change this for different data combination
 data_type="multi"
@@ -18,19 +14,18 @@ trainset="nij"
 checkpoint_base="./models-checkpoint/bal-ds-disj-btsp/"
 
 # Define model architectures
-# models=("vgg" "resnet" "inception" "densenet")
-models=("densenet")
+models=("vgg" "resnet" "inception" "densenet")
 
 # Model parameter
 batch_size=128
 solver_name="Adam"
 lr=0.0001
-num_epochs=300
+num_epochs=500
 
 
 # Image directories
-nir_image_root_dir="/afs/crc.nd.edu/user/r/rbhuiyan/iris-recognition-dataset/warsaw-nij-cropped-nir-images/"
-rgb_image_root_dir="/afs/crc.nd.edu/user/r/rbhuiyan/iris-recognition-dataset/warsaw-nij-cropped-rgb-images/"
+nir_image_root_dir="./iris-recognition-dataset/warsaw-nij-cropped-nir-images/"
+rgb_image_root_dir="./iris-recognition-dataset/warsaw-nij-cropped-rgb-images/"
 
 # Conditional selection of train and test data based on the trainset variable
 if [[ $trainset == "warsaw" ]]; then
@@ -43,8 +38,8 @@ if [[ $trainset == "warsaw" ]]; then
     multi_train_data="./train-testset/ds-disj-metadata/warsaw-multispectral-metadata.txt"
     multi_test_data="./train-testset/ds-disj-metadata/nij-multispectral-metadata.txt"
 
-    nir_syn_image_root_dir="/afs/crc.nd.edu/user/r/rbhuiyan/iris-recognition-dataset/syn-nij-NIR-images/"
-    rgb_syn_image_root_dir="/afs/crc.nd.edu/user/r/rbhuiyan/iris-recognition-dataset/syn-nij-RGB-images/"
+    nir_syn_image_root_dir="./iris-recognition-dataset/syn-nij-NIR-images/"
+    rgb_syn_image_root_dir="./iris-recognition-dataset/syn-nij-RGB-images/"
 
     nir_synthetic_data="./train-testset/bal-syn-metadata/bal-syn-warsaw-NIR-metadata.txt"
     rgb_synthetic_data="./train-testset/bal-syn-metadata/bal-syn-warsaw-RGB-metadata.txt"
