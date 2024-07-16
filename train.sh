@@ -56,8 +56,8 @@ elif [[ $trainset == "nij" ]]; then
     multi_train_data="./train-testset/ds-disj-metadata/nij-multispectral-metadata.txt"
     multi_test_data="./train-testset/ds-disj-metadata/warsaw-multispectral-metadata.txt"
 
-    nir_syn_image_root_dir="/afs/crc.nd.edu/user/r/rbhuiyan/iris-recognition-dataset/syn-nij-NIR-images/"
-    rgb_syn_image_root_dir="/afs/crc.nd.edu/user/r/rbhuiyan/iris-recognition-dataset/syn-nij-RGB-images/"
+    nir_syn_image_root_dir="./iris-recognition-dataset/syn-nij-NIR-images/"
+    rgb_syn_image_root_dir="./iris-recognition-dataset/syn-nij-RGB-images/"
 
     nir_synthetic_data="./train-testset/bal-syn-metadata/bal-syn-nij-NIR-metadata.txt"
     rgb_synthetic_data="./train-testset/bal-syn-metadata/bal-syn-nij-RGB-metadata.txt"
