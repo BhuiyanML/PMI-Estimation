@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -q 
+#$ -q gpu
 #$ -l gpu_card=4
 
 # Load conda module
