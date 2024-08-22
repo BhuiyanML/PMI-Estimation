@@ -201,10 +201,19 @@ def main(args):
     # Initialize the model based on architecture and data type
     if args.data_type.lower() == 'nir':
         input_channels = 1
-    elif args.data_type.lower() == 'rgb':
+        root_dir = args.nir_image_root_dir
+        multi_stream = False
+        print(f'Loading {args.data_type.lower()} data from {root_dir}')
+    elif args.data_type.lower()== 'rgb':
         input_channels = 3
+        root_dir = args.rgb_image_root_dir
+        multi_stream = False
+        print(f'Loading {args.data_type.lower()} data from {root_dir}')
     elif args.data_type.lower() == 'multi':
-        pass
+        nir_dir = args.nir_image_root_dir
+        rgb_dir = args.rgb_image_root_dir
+        multi_stream = True
+        print(f'Loading {args.data_type.lower()} data from {nir_dir} <> {rgb_dir}')
     else:
         raise ValueError(f"Unsupported data type: {args.data_type}")
 
@@ -260,22 +269,6 @@ def main(args):
     print(f'Loss function:{criterion}')
     print(f'Optimizer:{optimizer}')
 
-    if args.data_type.lower() == 'nir':
-        root_dir = args.nir_image_root_dir
-        multi_stream = False
-        print(f'Loading {args.data_type.lower()} data from {root_dir}')
-    elif args.data_type.lower()== 'rgb':
-        root_dir = args.rgb_image_root_dir
-        multi_stream = False
-        print(f'Loading {args.data_type.lower()} data from {root_dir}')
-    elif args.data_type.lower() == 'multi':
-        nir_dir = args.nir_image_root_dir
-        rgb_dir = args.rgb_image_root_dir
-        multi_stream = True
-        print(f'Loading {args.data_type.lower()} data from {nir_dir} <> {rgb_dir}')
-    else:
-        raise ValueError(f"Unsupported data type: {args.data_type}")
-
     # Loop through each fold
     for fold in range(0, 10):
         print(f"Starting fold {fold + 1}")
@@ -304,7 +297,7 @@ def main(args):
         print(f'Testset length: {len(test_loader)}')
         
         # Training and evaluating model
-        train_model(args, model, criterion, optimizer, train_loader, test_loader, fold, device)
+        train_model(args, model, criterion, optimizer, train_loader, val_loader, fold, device)
         evaluate_model(args, model, test_loader, fold, device)
 
         print(f"Completed fold {fold + 1}")
