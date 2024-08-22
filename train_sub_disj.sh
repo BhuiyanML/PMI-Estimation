@@ -1,6 +1,6 @@
 #!/bin/bash
 #$ -q gpu@@czajka,gpu@@cvrl-rtx6k,gpu@@cvrl-a10
-#$ -l gpu_card=2
+#$ -l gpu_card=4
 #$ -l h=qa-a10*
 #$ -N sub-multi
 
@@ -18,7 +18,7 @@ checkpoint="./models-checkpoint/sub-disj/$data_type/"
 models=("vgg" "resnet" "inception" "densenet")
 
 # Define model parameters
-batch_size=32
+batch_size=128
 solver_name="Adam"
 lr=0.0001
 num_epochs=500
