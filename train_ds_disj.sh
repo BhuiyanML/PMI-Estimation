@@ -3,7 +3,7 @@
 #$ -l gpu_card=4
 
 # Load conda module
-module load python/3.9
+module load python
 
 # Change directory to where the Python script is located
 cd ~/PMI-Estimation-main
