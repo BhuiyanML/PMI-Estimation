@@ -1,6 +1,8 @@
 #!/bin/bash
-#$ -q gpu
+#$ -q gpu@@czajka,gpu@@cvrl-rtx6k,gpu@@cvrl-a10
 #$ -l gpu_card=4
+#$ -l h=qa-a10*
+#$ -N ds-multi
 
 # Load conda module
 module load python
