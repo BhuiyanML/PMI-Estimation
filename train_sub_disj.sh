@@ -8,7 +8,7 @@
 module load python
 
 # Change directory to where the Python script is located
-cd ./PMI-Estimation-main
+cd ~/PMI-Estimation-main
 
 # Define data type and checkpoint directory
 data_type="multi"
