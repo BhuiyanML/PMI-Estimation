@@ -1,5 +1,7 @@
 #!/bin/bash
-#$ -q gpu@@czajka,gpu@@cvrl-rtx6k,gpu@@cvrl-a10
+#$ -M rbhuiyan@nd.edu
+#$ -m e
+#$ -q gpu
 #$ -l gpu_card=4
 #$ -l h=qa-a10*
 #$ -N sub-multi
@@ -21,12 +23,12 @@ models=("vgg" "resnet" "inception" "densenet")
 batch_size=128
 solver_name="Adam"
 lr=0.0001
-num_epochs=500
+num_epochs=1
 
 # Define image directories and metadata path
 nir_image_root_dir="./iris-recognition-dataset/warsaw-nij-cropped-nir-images/"
 rgb_image_root_dir="./iris-recognition-dataset/warsaw-nij-cropped-rgb-images/"
-metadata_file_path="./PMI-Estimation-main/train-testset/sub-disj/multispectral/"
+metadata_file_path="./train-testset/sub-disj/multispectral/"
 
 # Loop through each architecture
 for arch in "${models[@]}"; do

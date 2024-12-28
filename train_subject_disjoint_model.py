@@ -221,30 +221,34 @@ def main(args):
     print(f'Pretrained weights:{args.pretrained}')
 
     # Define the model based on the architecture and data type
-    if args.data_type.lower() != 'multi':  # Single stream models
-        if args.arch.lower() == 'alexnet':
+    if args.data_type != 'multi':  # Single stream models
+        if args.arch == 'alexnet':
             model = CustomAlexNet(input_channels=input_channels, pretrained=args.pretrained, num_classes=1)
-        elif args.arch.lower() == 'vgg':
+        elif args.arch == 'vgg':
             model = CustomVGG19(input_channels=input_channels, pretrained=args.pretrained, num_classes=1)
-        elif args.arch.lower() == 'resnet':
+        elif args.arch == 'resnet':
             model = CustomResNet152(input_channels=input_channels, pretrained=args.pretrained, num_classes=1)
-        elif args.arch.lower() == 'inception':
+        elif args.arch == 'inception':
             model = CustomInception(input_channels=input_channels, pretrained=args.pretrained, num_classes=1)
-        elif args.arch.lower() == 'densenet':
+        elif args.arch == 'densenet':
             model = CustomDenseNet121(input_channels=input_channels, pretrained=args.pretrained, num_classes=1)
+        elif args.arch == 'vit':
+            model = CustomViT(input_channels=input_channels, num_classes=1)
         else:
             raise ValueError(f"Unsupported model architecture: {args.arch} for single stream data type")
     else:  # Two-stream models for multispectral data
-        if args.arch.lower() == 'alexnet':
+        if args.arch == 'alexnet':
             model = TwoStreamAlexNet(pretrained=args.pretrained, num_classes=1)
-        elif args.arch.lower() == 'vgg':
+        elif args.arch == 'vgg':
             model = TwoStreamVGG(pretrained=args.pretrained, num_classes=1)
-        elif args.arch.lower() == 'resnet':
+        elif args.arch == 'resnet':
             model = TwoStreamResNet(pretrained=args.pretrained, num_classes=1)
-        elif args.arch.lower() == 'inception':
+        elif args.arch == 'inception':
             model = TwoStreamInception(pretrained=args.pretrained, num_classes=1)
-        elif args.arch.lower() == 'densenet':
+        elif args.arch == 'densenet':
             model = TwoStreamDenseNet(pretrained=args.pretrained, num_classes=1)
+        elif args.arch == 'vit':
+            model = TwoStreamViT(num_classes=1)
         else:
             raise ValueError(f"Unsupported model architecture: {args.arch} for multispectral data type")
 

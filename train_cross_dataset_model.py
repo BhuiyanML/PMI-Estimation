@@ -222,6 +222,11 @@ def main(args):
             model = CustomInception(input_channels=input_channels, pretrained=args.pretrained, num_classes=1)
         elif args.arch == 'densenet':
             model = CustomDenseNet121(input_channels=input_channels, pretrained=args.pretrained, num_classes=1)
+        elif args.arch == 'vit':
+            model = CustomViT(input_channels=input_channels, num_classes=1)
+        elif args.arch == 'domainresnet':
+            print("Loading weight from ./iris-pad-model/best_model.pth")
+            model = DomainResNet(input_channels=input_channels, num_classes=1, weight_path="./iris-pad-model/best_model.pth")
         else:
             raise ValueError(f"Unsupported model architecture: {args.arch} for single stream data type")
     else:  # Two-stream models for multispectral data
@@ -235,6 +240,11 @@ def main(args):
             model = TwoStreamInception(pretrained=args.pretrained, num_classes=1)
         elif args.arch == 'densenet':
             model = TwoStreamDenseNet(pretrained=args.pretrained, num_classes=1)
+        elif args.arch == 'vit':
+            model = TwoStreamViT(num_classes=1)
+        elif args.arch == 'domainresnet':
+            print("Loading weight from ./iris-pad-model/best_model.pth")
+            model = TwoStreamDomainResNet(num_classes=1, weight_path="./iris-pad-model/best_model.pth")
         else:
             raise ValueError(f"Unsupported model architecture: {args.arch} for multispectral data type")
 
